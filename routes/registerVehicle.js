@@ -3,9 +3,9 @@ const router = express.Router();
 const { RegisterCar, RegisterBike } = require('../controllers/RegisterVehicleController');
 
 // Route for customer KYC
-router.put('/add-bike', RegisterBike);
+router.post('/add-bike', RegisterBike);
 
 // Route for vendor KYC
-router.put('/add-car', RegisterCar);
+router.post('/add-car', RegisterCar);
 
 module.exports = router;

@@ -9,7 +9,6 @@ const CustomerKYC = (req,res) => {
             console.log(err);
             return res.status(500).json({ msg: "Somethig went wrong" });
         }
-
         return res.status(200).json({status: 'pending', message: "send for verification"});
     })
 }
@@ -24,8 +23,6 @@ const VendorKYC = (req,res) => {
             console.log(err);
             return res.status(500).json({ message: "Something went wrong" });
         }
-        
-
         return res.status(200).json({status: 'pending', message: "send for verification"});
     })
 }
