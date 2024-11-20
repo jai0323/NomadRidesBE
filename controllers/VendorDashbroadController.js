@@ -6,8 +6,8 @@ const VendorDashbroadController = async (req, res) => {
 
     const listofbike = await ListOfBike(vendor_id);
     const listofcar = await ListOfCar(vendor_id);
-    console.log("listofbike", listofbike);
-    console.log("listofcar", listofcar);
+    // console.log("listofbike", listofbike);
+    // console.log("listofcar", listofcar);
     return res.status(200).json({
         message: 'vehicle list',
         listofbike,

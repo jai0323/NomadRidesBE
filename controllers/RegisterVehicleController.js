@@ -5,7 +5,8 @@ const RegisterBike = (req, res) => {
     const storage = multer.memoryStorage();
     const upload = multer({ storage });
     const uploadSingle = upload.single('photo'); // 'photo' matches the key in the multipart form data
-
+    console.log("Request body:", req.body);
+    console.log("Uploaded file:", req.file);
     uploadSingle(req, res, (err) => {
         if (err) {
             console.log("Error in file upload:", err);
@@ -29,7 +30,7 @@ const RegisterBike = (req, res) => {
             photo,
             status: 'available'
         };
-
+        console.log("bike --- ",bike)
         const createTableQuery = `
             CREATE TABLE IF NOT EXISTS bike (
                 registration_no VARCHAR(50) NOT NULL PRIMARY KEY,
@@ -52,7 +53,7 @@ const RegisterBike = (req, res) => {
                 console.log("Error creating table:", err);
                 return res.status(500).json({ msg: "Database error during table creation" });
             }
-
+            console.log("Table creation successful or already exists.");
             // Check if registration number already exists
             db.query('SELECT * FROM bike WHERE registration_no = ?', [registration_no], (err, results) => {
                 if (err) {
@@ -83,7 +84,7 @@ const RegisterBike = (req, res) => {
                     bike.photo,
                     bike.status
                 ];
-
+                console.log(values)
                 db.query(insertBikeQuery, values, (err, result) => {
                     if (err) {
                         console.log("Error inserting bike data:", err);
@@ -98,18 +99,19 @@ const RegisterBike = (req, res) => {
 
 
 const RegisterCar = (req, res) => {
-
+  
     const storage = multer.memoryStorage();
     const upload = multer({ storage });
     const uploadSingle = upload.single('photo'); // 'photo' matches the key in the multipart form data
-
+    console.log("Request body:", req.body);
+    console.log("Uploaded file:", req.file);
     uploadSingle(req, res, (err) => {
         if (err) {
             console.log("Error in file upload:", err);
             return res.status(500).json({ error: "Error uploading file" });
         }
-    const { registration_no, vendor_id, brand, model, registration_date, fuel_type, type, last_service_date, photo } = req.body;
-
+    const { registration_no, vendor_id, brand, model, registration_date, fuel_type, type, last_service_date } = req.body;
+    const photo = req.file ? req.file.buffer : null;
     const car = {
         registration_no,
         vendor_id,
@@ -146,7 +148,7 @@ const RegisterCar = (req, res) => {
             console.log(err);
             return res.status(500).json({ msg: "Database error" });
         }
-
+        console.log("Table creation successful or already exists.");
         // Check if registration number already exists in the car table
         db.query('SELECT * FROM car WHERE registration_no = ?', [registration_no], async (err, results) => {
             if (err) {
