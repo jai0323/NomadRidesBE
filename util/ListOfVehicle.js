@@ -16,7 +16,7 @@ const ListOfBike = async(vendor_id) =>{
             });
         } catch (error) {
             console.error("ListOfBilke Error:", error);
-            throw error; // Propagate the error to the calling function 
+            return []; // Propagate the error to the calling function 
         }
   
 }
@@ -36,7 +36,7 @@ const ListOfCar = async(vendor_id) =>{
         });
     } catch (error) {
         console.error("ListOfCar Error:", error);
-        throw error; // Propagate the error to the calling function
+        return []; // Propagate the error to the calling function
     }
 
   

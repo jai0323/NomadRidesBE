@@ -13,7 +13,7 @@ const RegisterBike = (req, res) => {
             return res.status(500).json({ error: "Error uploading file" });
         }
 
-        const { registration_no, vendor_id, brand, model, registration_date, fuel_type, type, last_service_date } = req.body;
+        const { registration_no, vendor_id, brand, model, registration_date, fuel_type, type, last_service_date,amount } = req.body;
 
         // Convert the uploaded file to buffer
         const photo = req.file ? req.file.buffer : null;
@@ -28,6 +28,7 @@ const RegisterBike = (req, res) => {
             type,
             last_service_date,
             photo,
+            amount:parseFloat(amount),
             status: 'available'
         };
         console.log("bike --- ",bike)
@@ -43,6 +44,7 @@ const RegisterBike = (req, res) => {
                 last_service_date DATE,
                 photo MEDIUMBLOB,
                 status VARCHAR(20) DEFAULT 'available',
+                amount FLOAT,
                 FOREIGN KEY (vendor_id) REFERENCES vendor(id) ON DELETE CASCADE
             )
         `;
@@ -68,9 +70,9 @@ const RegisterBike = (req, res) => {
                 const insertBikeQuery = `
                     INSERT INTO bike (
                         registration_no, vendor_id, brand, model, registration_date, 
-                        fuel_type, type, last_service_date, photo, status
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                `;
+                        fuel_type, type, last_service_date, photo, status,amount
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                `; 
 
                 const values = [
                     bike.registration_no,
@@ -82,7 +84,8 @@ const RegisterBike = (req, res) => {
                     bike.type,
                     bike.last_service_date,
                     bike.photo,
-                    bike.status
+                    bike.status,
+                    bike.amount
                 ];
                 console.log(values)
                 db.query(insertBikeQuery, values, (err, result) => {
@@ -110,7 +113,7 @@ const RegisterCar = (req, res) => {
             console.log("Error in file upload:", err);
             return res.status(500).json({ error: "Error uploading file" });
         }
-    const { registration_no, vendor_id, brand, model, registration_date, fuel_type, type, last_service_date } = req.body;
+    const { registration_no, vendor_id, brand, model, registration_date, fuel_type, type, last_service_date, amount } = req.body;
     const photo = req.file ? req.file.buffer : null;
     const car = {
         registration_no,
@@ -122,6 +125,7 @@ const RegisterCar = (req, res) => {
         type,
         last_service_date,
         photo,
+        amount:parseFloat(amount),
         status: 'available'
     };
 
@@ -136,6 +140,7 @@ const RegisterCar = (req, res) => {
             type VARCHAR(50),
             last_service_date DATE,
             photo MEDIUMBLOB,
+            amount FLOAT,
             status VARCHAR(20) DEFAULT 'available',
             FOREIGN KEY (vendor_id) REFERENCES vendor(id) ON DELETE CASCADE
         )
@@ -164,8 +169,8 @@ const RegisterCar = (req, res) => {
             const insertCarQuery = `
                 INSERT INTO car (
                     registration_no, vendor_id, brand, model, registration_date, 
-                    fuel_type, type, last_service_date, photo, status
-                ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    fuel_type, type, last_service_date, photo, status,amount
+                ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             `;
 
             const values = [
@@ -178,7 +183,8 @@ const RegisterCar = (req, res) => {
                 car.type,
                 car.last_service_date,
                 car.photo,
-                car.status
+                car.status,
+                car.amount
             ];
 
             db.query(insertCarQuery, values, (err, result) => {
