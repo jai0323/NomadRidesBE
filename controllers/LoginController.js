@@ -25,6 +25,8 @@ const CustomerLogin = (req,res) =>{
                 email:results[0].email,
                 kyc_status:results[0].kyc_status,
                 id:results[0].id,
+                 phone:results[0].phone,
+                type:'customer'
 
             }
             res.status(200).json({ message: 'signin successful', user});
@@ -62,6 +64,8 @@ const VendorLogin = (req,res) =>{
                 email:results[0].email,
                 kyc_status:results[0].kyc_status,
                 id:results[0].id,
+                phone:results[0].phone,
+                type:'vendor'
 
             }
             res.status(200).json({ message: 'signin successful', user });

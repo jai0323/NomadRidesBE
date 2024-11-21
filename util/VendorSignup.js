@@ -20,6 +20,8 @@ function VendorSignup (vendor, res)  {
                 email:vendor.email,
                 kyc_status:vendor.kyc_status,
                 id:vendor.id,
+                 phone:customer.phone,
+                type:'vendor'
 
             }
             return res.status(200).json({ message: "signup successful", user });

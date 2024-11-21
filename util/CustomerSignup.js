@@ -20,6 +20,8 @@ function CustomerSignup (customer, res)  {
                 email:customer.email,
                 kyc_status:customer.kyc_status,
                 id:customer.id,
+                phone:customer.phone,
+                type:'customer'
 
             }
             return res.status(200).json({ message: "signup successful", user });

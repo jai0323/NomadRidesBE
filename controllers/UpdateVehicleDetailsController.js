@@ -12,8 +12,8 @@ const UpdateBike = (req, res) => {
             return res.status(500).json({ error: "Error uploading file" });
         }
 
-        const { registration_no, brand, model, registration_date, fuel_type, type, last_service_date, amount: amountStr } = req.body;
-
+        const { registration_no, brand, model, registration_date, fuel_type, type, last_service_date,status, amount: amountStr } = req.body;
+console.log(status)
         // Validate and parse amount
         const amount = parseFloat(amountStr);
         if (isNaN(amount)) {
@@ -28,14 +28,14 @@ const UpdateBike = (req, res) => {
                 UPDATE bike
                 SET 
                   brand = ?, model = ?, registration_date = ?, 
-                  fuel_type = ?, type = ?, last_service_date = ?, photo = ?, amount = ?
+                  fuel_type = ?, type = ?, last_service_date = ?, photo = ?, amount = ?, status = ?
                 WHERE registration_no = ?
               `
             : `
                 UPDATE bike
                 SET 
                   brand = ?, model = ?, registration_date = ?, 
-                  fuel_type = ?, type = ?, last_service_date = ?, amount = ?
+                  fuel_type = ?, type = ?, last_service_date = ?, amount = ?, status = ?
                 WHERE registration_no = ?
               `;
 
@@ -49,7 +49,8 @@ const UpdateBike = (req, res) => {
                   last_service_date,
                   photo,
                   amount,
-                  registration_no
+                  status,
+                  registration_no,
               ]
             : [
                   brand,
@@ -59,7 +60,8 @@ const UpdateBike = (req, res) => {
                   type,
                   last_service_date,
                   amount,
-                  registration_no
+                  status,
+                  registration_no,
               ];
 
         db.query(updateBikeQuery, values, (err, result) => {
@@ -87,7 +89,7 @@ const UpdateCar = (req, res) => {
             return res.status(500).json({ error: "Error uploading file" });
         }
 
-        const { registration_no, brand, model, registration_date, fuel_type, type, last_service_date, amount: amountStr } = req.body;
+        const { registration_no, brand, model, registration_date, fuel_type, type, last_service_date,status, amount: amountStr } = req.body;
 
         // Validate and parse amount
         const amount = parseFloat(amountStr);
@@ -103,14 +105,14 @@ const UpdateCar = (req, res) => {
                 UPDATE car
                 SET 
                     brand = ?, model = ?, registration_date = ?, 
-                    fuel_type = ?, type = ?, last_service_date = ?, amount = ?, photo = ?
+                    fuel_type = ?, type = ?, last_service_date = ?, amount = ?,status = ?, photo = ?
                 WHERE registration_no = ?
               `
             : `
                 UPDATE car
                 SET 
                     brand = ?, model = ?, registration_date = ?, 
-                    fuel_type = ?, type = ?, last_service_date = ?, amount = ?
+                    fuel_type = ?, type = ?, last_service_date = ?, amount = ?,status = ?
                 WHERE registration_no = ?
               `;
 
@@ -124,7 +126,8 @@ const UpdateCar = (req, res) => {
                   last_service_date,
                   amount,
                   photo,
-                  registration_no
+                  status,
+                  registration_no,
               ]
             : [
                   brand,
@@ -134,7 +137,8 @@ const UpdateCar = (req, res) => {
                   type,
                   last_service_date,
                   amount,
-                  registration_no
+                  status,
+                  registration_no,
               ];
 
         // Debugging: Log query and values

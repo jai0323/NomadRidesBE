@@ -3,7 +3,7 @@ const db = require('../config/dbConn');
 const ListOfBike = async(vendor_id) =>{
     try {
             return await new Promise((resolve, reject) => {
-            const query = 'SELECT * FROM bike where vendor_id = ?';  // Adjust the table name if needed
+            const query =vendor_id? 'SELECT * FROM bike where vendor_id = ?' : 'SELECT * FROM bike';  // Adjust the table name if needed
 
                 db.query(query, vendor_id, (err, results) => {
                     if (err) {
@@ -23,7 +23,7 @@ const ListOfBike = async(vendor_id) =>{
 const ListOfCar = async(vendor_id) =>{
     try {
         return await new Promise((resolve, reject) => {
-        const query = 'SELECT * FROM car where vendor_id = ?';  // Adjust the table name if needed
+        const query =vendor_id? 'SELECT * FROM car where vendor_id = ?' : 'SELECT * FROM car';  // Adjust the table name if needed
 
             db.query(query, vendor_id,(err, results) => {
                 if (err) {

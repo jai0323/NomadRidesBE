@@ -26,5 +26,7 @@ app.use('/kyc_list', require('./routes/admin/listofkyc'));
 app.use('/vehicle_list', require('./routes/vendorDashbroad'));  
 app.use('/vehicle', require('./routes/registerVehicle'));
 app.use('/vehicle', require('./routes/updateVehicle'));
+app.use('/getVehicle', require('./routes/getVehicle'));
+app.use('/booking', require('./routes/booking'));
 
 app.listen(PORT, () => console.log(`Server is running at ${PORT}`));
