@@ -28,5 +28,6 @@ app.use('/vehicle', require('./routes/registerVehicle'));
 app.use('/vehicle', require('./routes/updateVehicle'));
 app.use('/getVehicle', require('./routes/getVehicle'));
 app.use('/booking', require('./routes/booking'));
+app.use('/deleteVehicle', require('./routes/deleteVehicle'));
 
 app.listen(PORT, () => console.log(`Server is running at ${PORT}`));

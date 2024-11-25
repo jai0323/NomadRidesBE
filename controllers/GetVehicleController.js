@@ -9,13 +9,13 @@ const GetVehicleController = async (req,res) => {
             console.log(err);
             return res.status(500).json({ msg: "Somethig went wrong" });
         }
-        db.query(`SELECT * from vendor where id = '${result[0].vendor_id}'`, (err, vendor) => {
+        db.query(`SELECT * from vendor where id = '${result[0]?.vendor_id}'`, (err, vendor) => {
             if (err) {
                 console.log("get vehicle line:8");
                 console.log(err);
                 return res.status(500).json({ msg: "Somethig went wrong" });
             }
-        return res.status(200).json({status: 'fetched', vehicle: result[0], vendor:vendor[0]});
+            return res.status(200).json({status: 'fetched', vehicle: result[0], vendor:vendor[0]});
         });
     });
 }
