@@ -125,8 +125,8 @@ const UpdateCar = (req, res) => {
                   type,
                   last_service_date,
                   amount,
-                  photo,
                   status,
+                  photo,
                   registration_no,
               ]
             : [

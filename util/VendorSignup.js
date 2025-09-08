@@ -20,7 +20,7 @@ function VendorSignup (vendor, res)  {
                 email:vendor.email,
                 kyc_status:vendor.kyc_status,
                 id:vendor.id,
-                 phone:customer.phone,
+                phone:vendor.phone,
                 type:'vendor'
 
             }

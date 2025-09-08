@@ -79,6 +79,7 @@ const VendorSignup = async (req, res) => {
             password VARCHAR(100) NOT NULL,
             license VARCHAR(50),
             pan VARCHAR(50),
+            aadhaar VARCHAR(50),
             address VARCHAR(255),
             city VARCHAR(100),
             kyc_status VARCHAR(50) DEFAULT 'pending',
